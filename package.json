@@ -1,0 +1,29 @@
+{
+  "name": "employeetracker",
+  "version": "1.0.0",
+  "description": "Employee Content Management System",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TravisGuillory/EmployeeTracker.git"
+  },
+  "keywords": [
+    "Employee",
+    "Management",
+    "CMS"
+  ],
+  "author": "Travis Guillory",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TravisGuillory/EmployeeTracker/issues"
+  },
+  "homepage": "https://github.com/TravisGuillory/EmployeeTracker#readme",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "inquirer": "^7.1.0",
+    "mysql": "^2.18.1"
+  }
+}
