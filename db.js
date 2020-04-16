@@ -1,5 +1,5 @@
 const mySql = require('mysql');
-
+// 
 class Database{
     constructor(config){
         this.connection =mySql.createConnection(config);
