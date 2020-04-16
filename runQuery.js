@@ -1,7 +1,7 @@
 const mySql = require('mysql');
 const Database = require('./db.js');
-const Table = require('cli-table');
-
+const Table = require('cli-table3');
+const br = '\n';
 // 
 let db = new Database({
     host: 'localhost',
@@ -24,7 +24,8 @@ let viewDepartments = async () => {
             [e.id, e.name]
         );
     });
-    console.log(table.toString());
+    console.log(br + table.toString() + br);
+    
 
 };
 
@@ -39,26 +40,25 @@ let viewRoles = async () => {
             [e.id, e.title, e.salary, e.department_id]
         );
     });
-    console.log(table.toString());
+    console.log(br + table.toString() + br);
 };
 
 let viewEmployees = async () => {
 
     let query = await db.viewEmployees();
     let table = new Table({
+        defaultValue: 0,
+        errorOnNull: false,
         head: ['ID', 'First Name', 'Last Name', 'Role ID', 'Manager ID'],
         colWidths: [20, 20, 20, 20, 20]
     });
-    // -- Replace null values with a space for cli-table
-    query.forEach((e, i) => {
-        if (e.i === null) e.i = "";
-    });
-    query.forEach(e => {
+     query.forEach(e => {
         table.push(
             [e.id, e.first_name, e.last_name, e.role_id, e.manager_id]
         );
     });
-    console.log(table.toString());
+        console.log(br + table.toString() + br);
+   
 };
 
 let addEmployee = async() => {
@@ -66,6 +66,27 @@ let addEmployee = async() => {
     console.log(query);
 
 };
+
+let addDepartment = async(name) => {
+
+}
+
+
+
+
+let getDepartmentNames = async() => {
+
+};
+
+
+let getRoleNames = async () => {
+
+};
+
+
+
+
+
 let close = async () => {
     let query = await db.close();
 };

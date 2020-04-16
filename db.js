@@ -8,7 +8,9 @@ class Database{
 
 
     async addEmployee(){
-
+        return new Promise((resolve, reject) =>{
+            this.coneection.query('INSERT INTO ')
+        });
     }
 
     async addDepartment(){

@@ -1,6 +1,4 @@
 const mySql = require('mysql');
-
-const Table = require('cli-table');
 const inquiry = require('./inquiry.js');
 const runQuery = require('./runQuery.js');
 // 
@@ -14,7 +12,7 @@ const runQuery = require('./runQuery.js');
 async function main() {
     let exitApp = false;
     while (!exitApp) {
-        const selection = await inquiry.mainTask();
+        const selection = await inquiry.mainInquiry();
 
         switch (selection.action) {
             case ('View Departments'):
@@ -27,13 +25,17 @@ async function main() {
                 runQuery.viewEmployees();
                 break;
             case ('Add Employee'):
+
+                const newEmployee = await addEmployeeInquiry();
                 runQuery.addEmployee();
                 break;
             case ('Add Role'):
 
                 break;
             case ('Add Department'):
-
+                const newDepartmentInfo = await addDepartmentInquiry();
+                console.log(newDepartmentInfo);
+                // runQuery.addDepartment(newDepartmentinfo.name);
                 break;
             case ('Exit'):
                 exitApp = true;

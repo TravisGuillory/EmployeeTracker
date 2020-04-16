@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 // 
-let mainTask = async () =>{
+let mainInquiry = async () =>{
     return await inquirer.prompt([
 
         {
@@ -19,10 +19,38 @@ let mainTask = async () =>{
 ])
 }
 
-let anotherTask =  () =>{return "Kiss my ass ";}
+let addDepartmentInquiry = async () =>{
+    return await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'department_name',
+            message: "Enter department name."
+        }
+    ])
+}
+
+let addEmployeeInfo = async () =>{
+    return await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'first_name',
+            message: 'Enter first name of employee.',
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: 'Enter last name of employee.'
+            
+        },
+
+
+    ])
+}
+
+
 
 module.exports  = {
-    mainTask: mainTask,
-    anotherTask: anotherTask
+    mainInquiry: mainInquiry,
+    addDepartmentInquiry: addDepartmentInquiry
 
 }
