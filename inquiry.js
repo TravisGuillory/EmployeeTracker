@@ -26,6 +26,7 @@ let addDepartmentInquiry = async () =>{
             name: 'department_name',
             message: "Enter department name."
         }
+        
     ])
 }
 
@@ -51,6 +52,7 @@ let addEmployeeInfo = async () =>{
 
 module.exports  = {
     mainInquiry: mainInquiry,
-    addDepartmentInquiry: addDepartmentInquiry
+    addDepartmentInquiry: addDepartmentInquiry,
+    addEmployeeInfo: addEmployeeInfo
 
 }

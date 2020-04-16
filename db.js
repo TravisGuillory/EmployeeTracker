@@ -8,17 +8,27 @@ class Database{
 
 
     async addEmployee(){
+        return("addEmployee return");
+       /*  return new Promise((resolve, reject) =>{
+            this.connection.query('INSERT INTO ')
+        }); */
+    }
+
+    async addDepartment(name){
         return new Promise((resolve, reject) =>{
-            this.coneection.query('INSERT INTO ')
+            this.connection.query("INSERT INTO department(name) VALUES (?)", [name], (err, data) =>{
+                if (err){
+                    console.log(err);
+                    return reject(err);
+                }
+                resolve(data);
+            });
+
         });
     }
 
-    async addDepartment(){
-
-    }
-
     async addRole(){
-
+        
    }
 
     async viewEmployees(){

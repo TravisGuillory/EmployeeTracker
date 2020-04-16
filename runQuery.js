@@ -68,7 +68,9 @@ let addEmployee = async() => {
 };
 
 let addDepartment = async(name) => {
-
+    
+    await db.addDepartment(name);
+    await viewDepartments();
 }
 
 
@@ -96,5 +98,6 @@ module.exports = {
     viewRoles: viewRoles,
     viewEmployees: viewEmployees,
     addEmployee: addEmployee,
+    addDepartment: addDepartment,
     close: close
 }

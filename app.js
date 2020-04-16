@@ -26,16 +26,15 @@ async function main() {
                 break;
             case ('Add Employee'):
 
-                const newEmployee = await addEmployeeInquiry();
+                const newEmployee = await inquiry.addEmployeeInquiry();
                 runQuery.addEmployee();
                 break;
             case ('Add Role'):
 
                 break;
             case ('Add Department'):
-                const newDepartmentInfo = await addDepartmentInquiry();
-                console.log(newDepartmentInfo);
-                // runQuery.addDepartment(newDepartmentinfo.name);
+                const newDepartmentInfo = await inquiry.addDepartmentInquiry();
+                await runQuery.addDepartment(newDepartmentInfo.department_name);
                 break;
             case ('Exit'):
                 exitApp = true;
