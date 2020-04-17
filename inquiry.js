@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
-// 
+const runQuery = require('./runQuery.js');
+
 let mainInquiry = async () =>{
     return await inquirer.prompt([
 
@@ -16,7 +17,7 @@ let mainInquiry = async () =>{
                 'Exit']
         }
             
-])
+]);
 }
 
 let addDepartmentInquiry = async () =>{
@@ -24,10 +25,32 @@ let addDepartmentInquiry = async () =>{
         {
             type: 'input',
             name: 'department_name',
-            message: "Enter department name."
+            message: "Enter Department Name: "
         }
         
-    ])
+    ]);
+}
+
+let addRoleInquiry = async () =>{
+    const departments = await runQuery.getDepartmentColumn('id');
+    return await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'role_name',
+            message: 'Enter Title of new Role: '
+        },
+        {
+            type: 'input',
+            name: 'role_salary',
+            message: 'Enter Salary of the new Role: '
+        },
+        {
+            type: 'list',
+            name: 'department_name',
+            choices: [...departments]
+        }
+        
+    ]);
 }
 
 let addEmployeeInfo = async () =>{
@@ -35,7 +58,7 @@ let addEmployeeInfo = async () =>{
         {
             type: 'input',
             name: 'first_name',
-            message: 'Enter first name of employee.',
+            message: 'Enter first name of employee: ',
         },
         {
             type: 'input',
@@ -43,9 +66,7 @@ let addEmployeeInfo = async () =>{
             message: 'Enter last name of employee.'
             
         },
-
-
-    ])
+    ]);
 }
 
 
@@ -53,6 +74,7 @@ let addEmployeeInfo = async () =>{
 module.exports  = {
     mainInquiry: mainInquiry,
     addDepartmentInquiry: addDepartmentInquiry,
+    addRoleInquiry: addRoleInquiry,
     addEmployeeInfo: addEmployeeInfo
 
 }

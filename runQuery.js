@@ -7,13 +7,13 @@ let db = new Database({
     host: 'localhost',
     port: '3306',
     user: 'root',
-    password: '1Gumbo@cash2!',
+    password: '*',
     database: 'employee_trackerdb'
 });
 
 
 let viewDepartments = async () => {
-    let query = await db.viewDepartments();
+    let query = await db.getDepartments();
 
     let table = new Table({
         head: ['ID', 'Name'],
@@ -30,7 +30,7 @@ let viewDepartments = async () => {
 };
 
 let viewRoles = async () => {
-    let query = await db.viewRoles();
+    let query = await db.getRoles();
     let table = new Table({
         head: ['ID', 'Title', 'Salary', 'Dept ID'],
         colWidths: [10, 40, 20, 10]
@@ -45,7 +45,7 @@ let viewRoles = async () => {
 
 let viewEmployees = async () => {
 
-    let query = await db.viewEmployees();
+    let query = await db.getEmployees();
     let table = new Table({
         defaultValue: 0,
         errorOnNull: false,
@@ -67,17 +67,34 @@ let addEmployee = async() => {
 
 };
 
-let addDepartment = async(name) => {
+let addDepartment = async (name) => {
     
     await db.addDepartment(name);
     await viewDepartments();
-}
+};
 
+let addRole = async (name, salary, department) => {
+    await db.addRole(name, salary, department);
+    await viewRoles();
 
+};
 
-
-let getDepartmentNames = async() => {
-
+// -- Function to get department column values based on argument value
+let getDepartmentColumn = async (columnName) => {
+    console.log(columnName);
+    
+    let query = await db.getAllDepartments();
+    console.log(Object.keys(query[0]));
+    console.log(query);
+    console.log(typeof query);
+    let departments = [];
+    query.forEach((e) =>{
+        departments.push(e);
+        
+    })
+    
+    process.exit(0);
+    // return departments;
 };
 
 
@@ -99,5 +116,7 @@ module.exports = {
     viewEmployees: viewEmployees,
     addEmployee: addEmployee,
     addDepartment: addDepartment,
+    addRole: addRole,
+    getDepartmentColumn: getDepartmentColumn,
     close: close
 }
