@@ -7,7 +7,7 @@ let db = new Database({
     host: 'localhost',
     port: '3306',
     user: 'root',
-    password: '*',
+    password: 'X',
     database: 'employee_trackerdb'
 });
 
@@ -25,7 +25,7 @@ let viewDepartments = async () => {
         );
     });
     console.log(br + table.toString() + br);
-    
+
 
 };
 
@@ -52,55 +52,57 @@ let viewEmployees = async () => {
         head: ['ID', 'First Name', 'Last Name', 'Role ID', 'Manager ID'],
         colWidths: [20, 20, 20, 20, 20]
     });
-     query.forEach(e => {
+    query.forEach(e => {
         table.push(
             [e.id, e.first_name, e.last_name, e.role_id, e.manager_id]
         );
     });
-        console.log(br + table.toString() + br);
-   
+    console.log(br + table.toString() + br);
+
 };
 
-let addEmployee = async() => {
+let addEmployee = async () => {
     let query = await db.addEmployee();
     console.log(query);
 
 };
 
 let addDepartment = async (name) => {
-    
+
     await db.addDepartment(name);
     await viewDepartments();
 };
 
-let addRole = async (name, salary, department) => {
-    await db.addRole(name, salary, department);
+let addRole = async (name, salary, departmentId) => {
+    await db.addRole(name, salary, departmentId);
     await viewRoles();
 
 };
 
-// -- Function to get department column values based on argument value
-let getDepartmentColumn = async (columnName) => {
-    console.log(columnName);
-    
+// -- Function to get department rows containing id and name.
+let getDepartmentNames = async () => {
     let query = await db.getAllDepartments();
-    console.log(Object.keys(query[0]));
-    console.log(query);
-    console.log(typeof query);
-    let departments = [];
-    query.forEach((e) =>{
-        departments.push(e);
-        
-    })
-    
-    process.exit(0);
-    // return departments;
+
+    let departmentNames = [];
+
+    query.forEach((e) => {
+        //departmentColumns.push(e[columnName]);
+        departmentNames.push(e.name);
+    });
+
+    return departmentNames;
 };
 
 
 let getRoleNames = async () => {
 
 };
+
+let getDepartmentIdByName = async (departmentName) => {
+    console.log(departmentName);
+    let query = await db.getDepartmentIdByName(departmentName);
+    return(query[0].id);
+}
 
 
 
@@ -110,13 +112,20 @@ let close = async () => {
     let query = await db.close();
 };
 
+
+
+
+
 module.exports = {
     viewDepartments: viewDepartments,
     viewRoles: viewRoles,
     viewEmployees: viewEmployees,
-    addEmployee: addEmployee,
     addDepartment: addDepartment,
     addRole: addRole,
-    getDepartmentColumn: getDepartmentColumn,
+    addEmployee: addEmployee,
+    getDepartmentNames: getDepartmentNames,
+    getDepartmentIdByName: getDepartmentIdByName,
+    getRoleNames, getRoleNames,
+    getDepartmentIdByName: getDepartmentIdByName,
     close: close
 }

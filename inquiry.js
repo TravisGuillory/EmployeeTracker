@@ -32,7 +32,7 @@ let addDepartmentInquiry = async () =>{
 }
 
 let addRoleInquiry = async () =>{
-    const departments = await runQuery.getDepartmentColumn('id');
+    const departments = await runQuery.getDepartmentNames();
     return await inquirer.prompt([
         {
             type: 'input',
@@ -68,6 +68,8 @@ let addEmployeeInfo = async () =>{
         },
     ]);
 }
+
+
 
 
 
