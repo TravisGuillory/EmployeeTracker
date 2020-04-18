@@ -158,6 +158,15 @@ let getAllManagers = async () => {
     return managers;
 };
 
+let updateEmployeeRole = async (updateInfo) => {
+    // - split name of employee and get id,  get id of new Role
+    updateInfo.first_name = updateInfo.employee_to_update.split(',')[1].trim();
+    updateInfo.last_name = updateInfo.employee_to_update.split(',')[0].trim();
+    let newRoleId = await db.getRoleIdByName(updateInfo.new_role);
+    updateInfo.role_id = newRoleId[0].id;
+    let query = db.updateEmployeeRole(updateInfo);
+    await viewEmployees();
+}
 
 
 let close = async () => {
@@ -183,5 +192,6 @@ module.exports = {
     getEmployeeNames: getEmployeeNames,
     getEmployeeIdByName: getEmployeeIdByName,
     getAllManagers: getAllManagers,
+    updateEmployeeRole: updateEmployeeRole,
     close: close
 }

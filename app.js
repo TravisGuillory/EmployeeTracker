@@ -25,13 +25,7 @@ async function main() {
                 await runQuery.viewEmployees();
                 break;
             case ('Add Employee'):
-
                 const newEmployeeInfo = await inquiry.addEmployeeInquiry();
-                
-
-                
-                
-                
                 await runQuery.addEmployee(newEmployeeInfo);
                 break;
             case ('Add Role'):
@@ -44,11 +38,8 @@ async function main() {
                 await runQuery.addDepartment(newDepartmentInfo.department_name);
                 break;
             case ('Update Employee Role'):
-                const updateRole = await inquiry.updateEmployeeRoleInquiry()
-                const employeeFullName = updateRole.employee_to_update.split(',');
-                const firstName = employeeFullName[1];
-                const lastName = employeeFullName[0];
-                
+                const updateRoleInfo = await inquiry.updateEmployeeRoleInquiry()
+                await runQuery.updateEmployeeRole(updateRoleInfo);
                 break;
             case ('test Function'):
                 let roleId = await runQuery.getEmployeeIdByName('William', 'Nelson');
