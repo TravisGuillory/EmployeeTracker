@@ -21,4 +21,5 @@ The application was created using node.js with the following dependencies:
 * cli-table3
 
 [employeetrackerGif1](Assets/employeetrackerGif1.gif)
+
 [employeetrackerGif1](Assets/employeetrackerGif2.gif)
