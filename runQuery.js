@@ -7,7 +7,7 @@ let db = new Database({
     host: 'localhost',
     port: '3306',
     user: 'root',
-    password: 'X',
+    password: '1Gumbo@cash2!',
     database: 'employee_trackerdb'
 });
 
@@ -61,9 +61,22 @@ let viewEmployees = async () => {
 
 };
 
-let addEmployee = async () => {
-    let query = await db.addEmployee();
+let addEmployee = async (newEmployeeInfo) => {
+    
+    
+    let roleId = await db.getRoleIdByName(newEmployeeInfo.role);
+    newEmployeeInfo.role_id = roleId[0].id;
+    managerFirstName = newEmployeeInfo.manager_name.split(',')[1].trim();
+    managerLastName = newEmployeeInfo.manager_name.split(',')[0].trim();
+    let managerId = await db.getEmployeeIdByName(managerFirstName, managerLastName);
+    newEmployeeInfo.manager_id = managerId[0].id; 
+    
+    
+    
+    let query = await db.addEmployee(newEmployeeInfo);
     console.log(query);
+    await viewEmployees(); 
+
 
 };
 
@@ -82,29 +95,68 @@ let addRole = async (name, salary, departmentId) => {
 // -- Function to get department rows containing id and name.
 let getDepartmentNames = async () => {
     let query = await db.getAllDepartments();
-
     let departmentNames = [];
-
     query.forEach((e) => {
         //departmentColumns.push(e[columnName]);
         departmentNames.push(e.name);
     });
-
     return departmentNames;
 };
 
+let getDepartmentIdByName = async (departmentName) => {
+    let queryDepartments = await db.getAllDepartments();
+    let deptId;
+    queryDepartments.forEach((e) => {
+        if (e.name === departmentName) {
+            deptId = e.id;
+        }
+    });
+    return deptId;
+};
 
 let getRoleNames = async () => {
+    let query = await db.getRoles();
+    let roleNames = [];
+    query.forEach((e) => {
+        roleNames.push(e.title);
+    });
+    return roleNames;
+};
+
+let  getRoleIdByName = async (roleName) =>{
+    let query = await db.getRoleIdByName(roleName);
+   
+    return query[0].id;
+};
+
+
+let getEmployeeNames = async () => {
+    let query = await db.getEmployees();
+    let employeeNames = [];
+    query.forEach((e) => {
+        employeeNames.push(e.last_name + ", " + e.first_name);
+    });
+    return employeeNames;
 
 };
 
-let getDepartmentIdByName = async (departmentName) => {
-    console.log(departmentName);
-    let query = await db.getDepartmentIdByName(departmentName);
-    return(query[0].id);
+let getEmployeeIdByName = async (firstName, lastName) =>{
+    console.log(firstName, lastName);
+    let query = await db.getEmployeeIdByName(firstName, lastName);
+    console.log(query);
+    return query[0].id;
 }
 
-
+let getAllManagers = async () => {
+    
+    let query = await db.getAllManagers();
+    
+    let managers = [];
+    query.forEach((e) =>{
+        managers.push(e.last_name + ', '+ e.first_name);
+    });
+    return managers;
+};
 
 
 
@@ -125,7 +177,11 @@ module.exports = {
     addEmployee: addEmployee,
     getDepartmentNames: getDepartmentNames,
     getDepartmentIdByName: getDepartmentIdByName,
-    getRoleNames, getRoleNames,
+    getRoleNames: getRoleNames,
+    getRoleIdByName: getRoleIdByName,
     getDepartmentIdByName: getDepartmentIdByName,
+    getEmployeeNames: getEmployeeNames,
+    getEmployeeIdByName: getEmployeeIdByName,
+    getAllManagers: getAllManagers,
     close: close
 }

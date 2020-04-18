@@ -14,11 +14,13 @@ let mainInquiry = async () =>{
                 'Add Department', 
                 'Add Role', 
                 'Add Employee',
+                'Update Employee Role',
+                'test Function',
                 'Exit']
         }
             
 ]);
-}
+};
 
 let addDepartmentInquiry = async () =>{
     return await inquirer.prompt([
@@ -29,7 +31,7 @@ let addDepartmentInquiry = async () =>{
         }
         
     ]);
-}
+};
 
 let addRoleInquiry = async () =>{
     const departments = await runQuery.getDepartmentNames();
@@ -40,7 +42,7 @@ let addRoleInquiry = async () =>{
             message: 'Enter Title of new Role: '
         },
         {
-            type: 'input',
+            type: 'number',
             name: 'role_salary',
             message: 'Enter Salary of the new Role: '
         },
@@ -51,10 +53,13 @@ let addRoleInquiry = async () =>{
         }
         
     ]);
-}
+};
 
-let addEmployeeInfo = async () =>{
-    return await inquirer.prompt([
+let addEmployeeInquiry = async () =>{
+    let roleNames = await runQuery.getRoleNames();
+    let managers = await runQuery.getAllManagers();
+    
+        return await inquirer.prompt([
         {
             type: 'input',
             name: 'first_name',
@@ -66,8 +71,45 @@ let addEmployeeInfo = async () =>{
             message: 'Enter last name of employee.'
             
         },
+        {
+            type: 'list', 
+            name: 'role',
+            message: 'Select the role of the employee',
+            choices: [...roleNames]
+        },
+        {
+            type: 'list',
+            name: 'manager_name',
+            message: 'Slect the manager of the employee',
+            choices: [...managers]
+        } 
+        
     ]);
-}
+    
+    
+};
+
+
+
+let updateEmployeeRoleInquiry = async () => {
+    let employeeNames = await runQuery.getEmployeeNames();
+    let roleNames = await runQuery.getRoleNames();
+    return await inquirer.prompt([
+        {
+            type: 'list', 
+            name: 'employee_to_update',
+            message: 'Select the employee to update role',
+            choices: [...employeeNames]
+        },
+        {
+            type: 'list',
+            name: 'new_role',
+            message: 'Select the new role',
+            choices: [...roleNames]
+        }
+    ])
+
+};
 
 
 
@@ -77,6 +119,7 @@ module.exports  = {
     mainInquiry: mainInquiry,
     addDepartmentInquiry: addDepartmentInquiry,
     addRoleInquiry: addRoleInquiry,
-    addEmployeeInfo: addEmployeeInfo
+    addEmployeeInquiry: addEmployeeInquiry,
+    updateEmployeeRoleInquiry, updateEmployeeRoleInquiry
 
 }
