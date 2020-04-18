@@ -30,27 +30,28 @@ async function main() {
                 break;
             case ('Add Role'):
                 const newRole = await inquiry.addRoleInquiry();
+                // -- Convert department name taken by inquirer to dept id 
                 const targetDepartmentID = await runQuery.getDepartmentIdByName(newRole.department_name);
                 await runQuery.addRole(newRole.role_name, newRole.role_salary, targetDepartmentID);
                 break;
             case ('Add Department'):
                 const newDepartmentInfo = await inquiry.addDepartmentInquiry();
+                
                 await runQuery.addDepartment(newDepartmentInfo.department_name);
                 break;
             case ('Update Employee Role'):
                 const updateRoleInfo = await inquiry.updateEmployeeRoleInquiry()
+                // Different than newRole method. getting role_id in the runQuery.js 
                 await runQuery.updateEmployeeRole(updateRoleInfo);
                 break;
-            case ('test Function'):
-                let roleId = await runQuery.getEmployeeIdByName('William', 'Nelson');
-                console.log(roleId);
+            
 
             case ('Exit'):
                 exitApp = true;
                 process.exit(0);
 
             default:
-
+                console.log("Unauthorized part of the application reched");
                 break;
         }
     }
