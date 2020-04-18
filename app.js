@@ -48,6 +48,7 @@ async function main() {
 
             case ('Exit'):
                 exitApp = true;
+                await runQuery.close()
                 process.exit(0);
 
             default:

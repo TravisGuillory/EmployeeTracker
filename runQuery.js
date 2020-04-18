@@ -1,8 +1,11 @@
+// -- Functions in this file are used to initiate sql queries to the databse 
+// -- by instantation of the Database class. 
+
 const mySql = require('mysql');
 const Database = require('./db.js');
 const Table = require('cli-table3');
 const br = '\n';
-// 
+
 let db = new Database({
     host: 'localhost',
     port: '3306',
