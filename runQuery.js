@@ -7,7 +7,7 @@ let db = new Database({
     host: 'localhost',
     port: '3306',
     user: 'root',
-    password: '',
+    password: '1Gumbo@cash2!',
     database: 'employee_trackerdb'
 });
 
@@ -74,7 +74,7 @@ let addEmployee = async (newEmployeeInfo) => {
     
     
     let query = await db.addEmployee(newEmployeeInfo);
-    console.log(query);
+    
     await viewEmployees(); 
 
 

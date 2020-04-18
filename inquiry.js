@@ -59,6 +59,7 @@ let addEmployeeInquiry = async () =>{
     let roleNames = await runQuery.getRoleNames();
     let managers = await runQuery.getAllManagers();
     
+    
         return await inquirer.prompt([
         {
             type: 'input',
