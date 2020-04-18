@@ -20,4 +20,4 @@ The application was created using node.js with the following dependencies:
 * mysql
 * cli-table3
 
-![employeetrackerGif1](Assets/employeetrackerGif1.gif) ![employeetrackerGif2](Assets/employeetrackerGif2.gif) 
+![employeetrackerGif1](Assets/employeetrackerGif1.gif) ![employeetrackerGif2](Assets/rmployeetrackerGif2.gif) 
