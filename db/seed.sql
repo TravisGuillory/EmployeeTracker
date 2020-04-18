@@ -8,7 +8,7 @@ INSERT into
 		("Human Resources"),
 		("Customer Service")
 ;
-select * from department ORDER by id;
+
 
 INSERT IGNORE into role (title, salary, department_id)
 	VALUES
@@ -33,7 +33,7 @@ INSERT IGNORE INTO employee(first_name, last_name, role_id, manager_id)
         ("Andrew", "Griffith", 8, null),
         ("Bernard", "Fife", 10, null)
         ;
- select * from employee;       
+     
         
 INSERT IGNORE INTO employee(first_name, last_name, role_id, manager_id)
 	VALUES
@@ -45,4 +45,4 @@ INSERT IGNORE INTO employee(first_name, last_name, role_id, manager_id)
         ("Otis", "Campbell", 9, 4)
         ;
         
-select * from employee;
+
